@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AAXBatchIndividualTaskModelWorkItem</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+internal final class AAXBatchIndividualTaskModelWorkItem
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>doProcessWorkItem</Name>
+				<Source><![CDATA[
+    public static void doProcessWorkItem(RecId _recId)
+    {
+        AAXIndividualTaskWorkItemTable AAXIndividualTaskWorkItemTable;
+
+        select forupdate Id, Updated, RecId from AAXIndividualTaskWorkItemTable
+            where AAXIndividualTaskWorkItemTable.RecId == _recId
+            && AAXIndividualTaskWorkItemTable.Updated == NoYes::No;
+
+        if(AAXIndividualTaskWorkItemTable)
+        {
+            ttsbegin;
+            AAXIndividualTaskWorkItemTable.Updated = NoYes::Yes;
+            AAXIndividualTaskWorkItemTable.update();
+            ttscommit;
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

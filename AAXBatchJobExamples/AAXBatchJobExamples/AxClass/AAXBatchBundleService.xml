@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AAXBatchBundleService</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class AAXBatchBundleService extends SysOperationServiceBase implements BatchRetryable
+{
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>process</Name>
+				<Source><![CDATA[
+    void process(AAXBatchBundleDataContract _dataContract)
+    {
+        SetEnumerator SetEnumerator;
+
+        if(_dataContract.parmRecIds() == null)
+        {
+            _dataContract.parmRecIds(new Set(Types::Int64));
+        }
+
+        SetEnumerator = _dataContract.parmRecIds().getEnumerator();
+
+        info(strFmt("Running batch job with parameter: %1", _dataContract.parmWorkItemCount()));
+        Info(strfmt("ThrowError set to %1", _dataContract.parmThrowError()));
+        Info(strFmt("Bundle size set to %1", _dataContract.parmBundleSize()));
+
+        while(SetEnumerator.moveNext())
+        {
+            AAXBatchBundleWorkItem::doProcessWorkItem(SetEnumerator.current());
+
+            if(_dataContract.parmThrowError())
+            {
+                if(new RandomGenerate().randomInt(0,100) == 100)
+                    throw Error("Encountered Error");
+            }
+
+        }
+
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isRetryable</Name>
+				<Source><![CDATA[
+    /// <summary>
+    ///
+    /// </summary>
+    public boolean isRetryable()
+    {
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>numberOfRetries</Name>
+				<Source><![CDATA[
+    // Method to return the retry count.
+    public int numberOfRetries()
+    {
+        return 3;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>retryDelay</Name>
+				<Source><![CDATA[
+    // Method to return the retry delay in milliseconds.
+    public int retryDelay()
+    {
+        return 5000; // 5 seconds
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

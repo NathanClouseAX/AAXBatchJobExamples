@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ScheduleDemoBundleJob</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+class ScheduleDemoBundleJob extends ScheduleDemoJob
+{
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>description</Name>
+				<Source><![CDATA[
+    // Description for the dialog
+    public static ClassDescription description()
+    {
+        return "Dialog to process work items";
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>dialog</Name>
+				<Source><![CDATA[
+    // Dialog setup
+    public Object dialog()
+    {
+        DialogRunbase dialog = super();
+
+        dialog.caption("Batch Bundle Dialog");
+
+        fieldBundleSize.visible(false);
+
+        return dialog;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    // Main method to start the dialog
+    public static void main(Args _args)
+    {
+        ScheduleDemoBundleJob dialog = new ScheduleDemoBundleJob();
+        if (dialog.prompt())
+        {
+            dialog.runOperation();
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>run</Name>
+				<Source><![CDATA[
+    public void run()
+    {
+        AAXBatchPerfTable                   AAXBatchPerfTable;
+        System.Diagnostics.Stopwatch        stopWatch;
+        
+        BatchHeader                         batchHeader;
+        SysOperationServiceController       controller;
+
+        int                                 loopCounter = 0;
+        Set                                 RecIds;
+
+        AAXBatchBundleWorkItemTable         AAXBatchBundleWorkItemTable;
+
+        AAXBatchBundleWorkItemTable::reInit(workItemCount);
+
+        stopWatch = new System.Diagnostics.Stopwatch();
+        stopWatch.Start();
+
+        ttsbegin;
+
+        batchHeader = BatchHeader::construct();
+
+        AAXBatchBundleDataContract bundlesDataContract;
+
+        batchHeader.parmCaption(strFmt("AAX: Batch Bundle Example - %1 work items, %2 bundles", workItemCount, bundleSize ));
+
+        RecIds = new Set(Types::Int64);
+        loopCounter = 0;
+
+        while select RecId from AAXBatchBundleWorkItemTable
+        {
+            RecIds.add(AAXBatchBundleWorkItemTable.RecId);
+            loopCounter++;
+
+            if(loopCounter >= bundleSize)
+            {
+                controller = AAXBatchBundleJobController::construct();
+                bundlesDataContract = new AAXBatchBundleDataContract();
+
+                bundlesDataContract.parmRecIds(RecIds);
+                bundlesDataContract.parmThrowError(throwError);
+
+                batchHeader.addTask(controller);
+
+                RecIds = new Set(Types::Int64);
+                loopCounter = 0;
+                
+            }
+        }
+
+        batchHeader.save();
+
+        ttsCommit;
+
+        stopWatch.Stop();
+
+        ttsbegin;
+        AAXBatchPerfTable.BatchJobName = funcName();
+        AAXBatchPerfTable.Operation = AAXBatchOperation::Scheduling;
+        AAXBatchPerfTable.Milliseconds = stopWatch.ElapsedMilliseconds;
+        AAXBatchPerfTable.BatchHeaderRecId = batchHeader.parmBatchHeaderId();
+        AAXBatchPerfTable.insert();
+        ttscommit;
+
+        info(strFmt("Batch job '%1' Created", batchHeader.parmCaption()));
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

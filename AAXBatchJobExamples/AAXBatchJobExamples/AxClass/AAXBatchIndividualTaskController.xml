@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AAXBatchIndividualTaskController</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+class AAXBatchIndividualTaskController extends SysOperationServiceController
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>construct</Name>
+				<Source><![CDATA[
+    public static SysOperationController construct(Args _args = null)
+    {
+        SysOperationController controller = new AAXBatchIndividualTaskController(
+            classStr(AAXBatchIndividualTaskService),
+            methodStr(AAXBatchIndividualTaskService, process));
+
+        controller.parmArgs(_args);
+
+        return controller;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    public static void main(Args _args)
+    {
+        AAXBatchIndividualTaskController::construct(_args).startOperation();
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

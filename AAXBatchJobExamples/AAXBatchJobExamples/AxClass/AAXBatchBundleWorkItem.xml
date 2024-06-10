@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AAXBatchBundleWorkItem</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+internal final class AAXBatchBundleWorkItem
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>doProcessWorkItem</Name>
+				<Source><![CDATA[
+    public static void doProcessWorkItem(RecId _recId)
+    {
+        AAXBatchBundleWorkItemTable AAXBatchBundleWorkItemTable;
+
+        select forupdate Id, Updated, RecId from AAXBatchBundleWorkItemTable
+            where AAXBatchBundleWorkItemTable.RecId == _recId
+               && AAXBatchBundleWorkItemTable.Updated == NoYes::No;
+
+        if(AAXBatchBundleWorkItemTable)
+        {
+            ttscommit;
+            AAXBatchBundleWorkItemTable.Updated = NoYes::Yes;
+            AAXBatchBundleWorkItemTable.update();
+            ttsbegin;
+        }
+
+        
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

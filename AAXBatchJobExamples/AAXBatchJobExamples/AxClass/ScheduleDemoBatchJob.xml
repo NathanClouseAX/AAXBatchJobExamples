@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ScheduleDemoBatchJob</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+class ScheduleDemoBatchJob extends ScheduleDemoJob
+{
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>description</Name>
+				<Source><![CDATA[
+    // Description for the dialog
+    public static ClassDescription description()
+    {
+        return "Dialog to create Standard Batch Job";
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>dialog</Name>
+				<Source><![CDATA[
+    // Dialog setup
+    public Object dialog()
+    {
+        DialogRunbase dialog = super();
+
+        dialog.caption("Standard Batch Job Dialog");
+
+        fieldBundleSize.visible(false);
+
+        return dialog;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getFromDialog</Name>
+				<Source><![CDATA[
+    // Validate dialog fields
+    public boolean getFromDialog()
+    {
+        workItemCount = fieldWorkItemCount.value();
+
+        throwError = fieldThrowError.value();
+
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    // Main method to start the dialog
+    public static void main(Args _args)
+    {
+        ScheduleDemoBatchJob dialog = new ScheduleDemoBatchJob();
+        if (dialog.prompt())
+        {
+            dialog.run();
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>run</Name>
+				<Source><![CDATA[
+    public void run()
+    {
+        AAXBatchPerfTable                   AAXBatchPerfTable;
+        System.Diagnostics.Stopwatch        stopWatch;
+        
+        BatchHeader                         batchHeader;
+        AAXStandardBatchJob                 AAXStandardBatchJob;
+
+        int                                 loopCounter = 0;
+        Set                                 RecIds;
+
+        AAXStandardBatchJobTable            AAXStandardBatchJobTable;
+
+        AAXStandardBatchJobTable::reInit(workItemCount);
+
+
+        stopWatch = new System.Diagnostics.Stopwatch();
+        stopWatch.Start();
+
+        ttsbegin;
+
+        batchHeader = BatchHeader::construct();
+
+        batchHeader.parmCaption(strFmt("AAX: Batch Job Example - %1 work items", workItemCount));
+
+        AAXStandardBatchJob = AAXStandardBatchJob::construct();
+        AAXStandardBatchJob.parmWorkCount(workItemCount);
+        AAXStandardBatchJob.parmThrowError(throwError);
+        AAXStandardBatchJob.parmInBatch(true);
+        
+        batchHeader.addTask(AAXStandardBatchJob);
+
+        batchHeader.save();
+
+        ttsCommit;
+
+        stopWatch.Stop();
+
+        ttsbegin;
+        AAXBatchPerfTable.BatchJobName = funcName();
+        AAXBatchPerfTable.Operation = AAXBatchOperation::Scheduling;
+        AAXBatchPerfTable.Milliseconds = stopWatch.ElapsedMilliseconds;
+        AAXBatchPerfTable.BatchHeaderRecId = batchHeader.parmBatchHeaderId();
+        AAXBatchPerfTable.insert();
+        ttscommit;
+
+        info(strFmt("Batch job '%1' Created", batchHeader.parmCaption()));
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

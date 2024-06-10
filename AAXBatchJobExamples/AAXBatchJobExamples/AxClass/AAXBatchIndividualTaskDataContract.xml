@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AAXBatchIndividualTaskDataContract</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[DataContractAttribute]
+class AAXBatchIndividualTaskDataContract
+{
+    int64 RecId;
+    int64 workItemCount;
+    NoYes throwError;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>parmRecId</Name>
+				<Source><![CDATA[
+    [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    public int64 parmRecId(int64 _RecId = RecId)
+    {
+        RecId = _RecId;
+
+        return RecId;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmThrowError</Name>
+				<Source><![CDATA[
+    //[DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    public NoYes parmThrowError(NoYes _throwError = throwError)
+    {
+        throwError = _throwError;
+        return throwError;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmWorkItemCount</Name>
+				<Source><![CDATA[
+    //[DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    public int64 parmWorkItemCount(int64 _workItemCount = workItemCount)
+    {
+        workItemCount = _workItemCount;
+        return workItemCount;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

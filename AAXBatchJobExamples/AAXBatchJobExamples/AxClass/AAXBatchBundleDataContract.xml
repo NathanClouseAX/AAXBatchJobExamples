@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AAXBatchBundleDataContract</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[DataContractAttribute]
+class AAXBatchBundleDataContract
+{
+    Set RecIds;
+    int64 workItemCount;
+    int64 bundleSize;
+
+    NoYes throwError;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>parmRecIds</Name>
+				<Source><![CDATA[
+    [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    public Set parmRecIds(Set _recIds = RecIds)
+    {
+        RecIds = _recIds;
+
+        return RecIds;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmThrowError</Name>
+				<Source><![CDATA[
+    //[DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    public NoYes parmThrowError(NoYes _throwError = throwError)
+    {
+        throwError = _throwError;
+        return throwError;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmWorkItemCount</Name>
+				<Source><![CDATA[
+    //[DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    public int64 parmWorkItemCount(int64 _workItemCount = workItemCount)
+    {
+        workItemCount = _workItemCount;
+        return workItemCount;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmBundleSize</Name>
+				<Source><![CDATA[
+    //[DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    public int64 parmBundleSize(int64 _bundleSize = bundleSize)
+    {
+        bundleSize = _bundleSize;
+        return bundleSize;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

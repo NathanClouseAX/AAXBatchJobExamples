@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <BuildTasksDirectory Condition=" '$(BuildTasksDirectory)' == ''">$(MSBuildProgramFiles32)\MSBuild\Microsoft\Dynamics\AX</BuildTasksDirectory>
+    <Model>AAXBatchJobExamples</Model>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <OutputPath>bin</OutputPath>
+    <SchemaVersion>2.0</SchemaVersion>
+    <GenerateCrossReferences>True</GenerateCrossReferences>
+    <RunAppCheckerRules>False</RunAppCheckerRules>
+    <LogAppcheckerDiagsAsErrors>False</LogAppcheckerDiagsAsErrors>
+    <DeployOnline>False</DeployOnline>
+    <ProjectGuid>{e8a804c6-4ec2-4f56-a814-e15e8981c247}</ProjectGuid>
+    <Name>AAXBatchJobExamples</Name>
+    <RootNamespace>AAXBatchJobExamples</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <Configuration>Debug</Configuration>
+    <DBSyncInBuild>False</DBSyncInBuild>
+    <GenerateFormAdaptors>False</GenerateFormAdaptors>
+    <Company>
+    </Company>
+    <Partition>initial</Partition>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DataEntityExpandParentChildRelations>False</DataEntityExpandParentChildRelations>
+    <DataEntityUseLabelTextAsFieldName>False</DataEntityUseLabelTextAsFieldName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Action Menu Items\" />
+    <Folder Include="Base Enums\" />
+    <Folder Include="Classes\" />
+    <Folder Include="Menu Extensions\" />
+    <Folder Include="Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AxClass\AAXBatchBundleDataContract">
+      <SubType>Content</SubType>
+      <Name>AAXBatchBundleDataContract</Name>
+      <Link>Classes\AAXBatchBundleDataContract</Link>
+    </Content>
+    <Content Include="AxClass\AAXBatchBundleJobController">
+      <SubType>Content</SubType>
+      <Name>AAXBatchBundleJobController</Name>
+      <Link>Classes\AAXBatchBundleJobController</Link>
+    </Content>
+    <Content Include="AxClass\AAXBatchBundleService">
+      <SubType>Content</SubType>
+      <Name>AAXBatchBundleService</Name>
+      <Link>Classes\AAXBatchBundleService</Link>
+    </Content>
+    <Content Include="AxClass\AAXBatchBundleUIBuilder">
+      <SubType>Content</SubType>
+      <Name>AAXBatchBundleUIBuilder</Name>
+      <Link>Classes\AAXBatchBundleUIBuilder</Link>
+    </Content>
+    <Content Include="AxClass\AAXBatchBundleWorkItem">
+      <SubType>Content</SubType>
+      <Name>AAXBatchBundleWorkItem</Name>
+      <Link>Classes\AAXBatchBundleWorkItem</Link>
+    </Content>
+    <Content Include="AxClass\AAXBatchIndividualTaskController">
+      <SubType>Content</SubType>
+      <Name>AAXBatchIndividualTaskController</Name>
+      <Link>Classes\AAXBatchIndividualTaskController</Link>
+    </Content>
+    <Content Include="AxClass\AAXBatchIndividualTaskDataContract">
+      <SubType>Content</SubType>
+      <Name>AAXBatchIndividualTaskDataContract</Name>
+      <Link>Classes\AAXBatchIndividualTaskDataContract</Link>
+    </Content>
+    <Content Include="AxClass\AAXBatchIndividualTaskModelWorkItem">
+      <SubType>Content</SubType>
+      <Name>AAXBatchIndividualTaskModelWorkItem</Name>
+      <Link>Classes\AAXBatchIndividualTaskModelWorkItem</Link>
+    </Content>
+    <Content Include="AxClass\AAXBatchIndividualTaskService">
+      <SubType>Content</SubType>
+      <Name>AAXBatchIndividualTaskService</Name>
+      <Link>Classes\AAXBatchIndividualTaskService</Link>
+    </Content>
+    <Content Include="AxClass\AAXStandardBatchJob">
+      <SubType>Content</SubType>
+      <Name>AAXStandardBatchJob</Name>
+      <Link>Classes\AAXStandardBatchJob</Link>
+    </Content>
+    <Content Include="AxClass\ScheduleDemoBatchJob">
+      <SubType>Content</SubType>
+      <Name>ScheduleDemoBatchJob</Name>
+      <Link>Classes\ScheduleDemoBatchJob</Link>
+    </Content>
+    <Content Include="AxClass\ScheduleDemoBundleJob">
+      <SubType>Content</SubType>
+      <Name>ScheduleDemoBundleJob</Name>
+      <Link>Classes\ScheduleDemoBundleJob</Link>
+    </Content>
+    <Content Include="AxClass\ScheduleDemoIndividualTaskJob">
+      <SubType>Content</SubType>
+      <Name>ScheduleDemoIndividualTaskJob</Name>
+      <Link>Classes\ScheduleDemoIndividualTaskJob</Link>
+    </Content>
+    <Content Include="AxClass\ScheduleDemoJob">
+      <SubType>Content</SubType>
+      <Name>ScheduleDemoJob</Name>
+      <Link>Classes\ScheduleDemoJob</Link>
+    </Content>
+    <Content Include="AxEnum\AAXBatchOperation">
+      <SubType>Content</SubType>
+      <Name>AAXBatchOperation</Name>
+      <Link>Base Enums\AAXBatchOperation</Link>
+    </Content>
+    <Content Include="AxMenuExtension\SystemAdministration.AAXBatchJobExamples">
+      <SubType>Content</SubType>
+      <Name>SystemAdministration.AAXBatchJobExamples</Name>
+      <Link>Menu Extensions\SystemAdministration.AAXBatchJobExamples</Link>
+    </Content>
+    <Content Include="AxMenuItemAction\ScheduleDemoBatchJob">
+      <SubType>Content</SubType>
+      <Name>ScheduleDemoBatchJob</Name>
+      <Link>Action Menu Items\ScheduleDemoBatchJob</Link>
+    </Content>
+    <Content Include="AxMenuItemAction\ScheduleDemoBundleJob">
+      <SubType>Content</SubType>
+      <Name>ScheduleDemoBundleJob</Name>
+      <Link>Action Menu Items\ScheduleDemoBundleJob</Link>
+    </Content>
+    <Content Include="AxMenuItemAction\ScheduleDemoIndividualTaskJob">
+      <SubType>Content</SubType>
+      <Name>ScheduleDemoIndividualTaskJob</Name>
+      <Link>Action Menu Items\ScheduleDemoIndividualTaskJob</Link>
+    </Content>
+    <Content Include="AxTable\AAXBatchBundleWorkItemTable">
+      <SubType>Content</SubType>
+      <Name>AAXBatchBundleWorkItemTable</Name>
+      <Link>Tables\AAXBatchBundleWorkItemTable</Link>
+    </Content>
+    <Content Include="AxTable\AAXBatchPerfTable">
+      <SubType>Content</SubType>
+      <Name>AAXBatchPerfTable</Name>
+      <Link>Tables\AAXBatchPerfTable</Link>
+    </Content>
+    <Content Include="AxTable\AAXIndividualTaskWorkItemTable">
+      <SubType>Content</SubType>
+      <Name>AAXIndividualTaskWorkItemTable</Name>
+      <Link>Tables\AAXIndividualTaskWorkItemTable</Link>
+    </Content>
+    <Content Include="AxTable\AAXStandardBatchJobTable">
+      <SubType>Content</SubType>
+      <Name>AAXStandardBatchJobTable</Name>
+      <Link>Tables\AAXStandardBatchJobTable</Link>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(BuildTasksDirectory)\Microsoft.Dynamics.Framework.Tools.BuildTasks.17.0.targets" />
+</Project>

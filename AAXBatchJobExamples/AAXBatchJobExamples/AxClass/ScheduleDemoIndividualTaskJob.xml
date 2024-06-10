@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ScheduleDemoIndividualTaskJob</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+class ScheduleDemoIndividualTaskJob extends ScheduleDemoJob
+{
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>description</Name>
+				<Source><![CDATA[
+    // Description for the dialog
+    public static ClassDescription description()
+    {
+        return "Dialog to process work items";
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>dialog</Name>
+				<Source><![CDATA[
+    // Dialog setup
+    public Object dialog()
+    {
+        DialogRunbase dialog = super();
+
+        dialog.caption("Individual Task Dialog");
+
+        return dialog;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    // Main method to start the dialog
+    public static void main(Args _args)
+    {
+        ScheduleDemoIndividualTaskJob dialog = new ScheduleDemoIndividualTaskJob();
+        if (dialog.prompt())
+        {
+            dialog.runOperation();
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>run</Name>
+				<Source><![CDATA[
+    public void run()
+    {
+        AAXBatchPerfTable                   AAXBatchPerfTable;
+        System.Diagnostics.Stopwatch        stopWatch;
+
+        BatchHeader                         batchHeader;
+        AAXBatchIndividualTaskController    controller;
+
+        Set                                 RecIds;
+
+        AAXBatchBundleWorkItemTable         AAXBatchBundleWorkItemTable;
+
+        AAXBatchBundleWorkItemTable::reInit(workItemCount);
+
+        stopWatch = new System.Diagnostics.Stopwatch();
+        stopWatch.Start();
+
+        ttsbegin;
+
+        batchHeader = BatchHeader::construct();
+
+        AAXBatchIndividualTaskDataContract individualTasksDataContract;
+
+        batchHeader.parmCaption(strFmt("AAX: Individual Task Modeling - %1 work items", workItemCount));
+
+        while select RecId from AAXBatchBundleWorkItemTable
+        {
+
+            controller  = AAXBatchIndividualTaskController::construct();
+            individualTasksDataContract = new AAXBatchIndividualTaskDataContract();
+
+            individualTasksDataContract.parmRecId(AAXBatchBundleWorkItemTable.RecId);
+            individualTasksDataContract.parmThrowError(throwError);
+
+            batchHeader.addTask(controller);
+
+        }
+
+        batchHeader.save();
+
+        ttsCommit;
+
+        stopWatch.Stop();
+
+        ttsbegin;
+        AAXBatchPerfTable.BatchJobName = funcName();
+        AAXBatchPerfTable.Operation = AAXBatchOperation::Scheduling;
+        AAXBatchPerfTable.Milliseconds = stopWatch.ElapsedMilliseconds;
+        AAXBatchPerfTable.BatchHeaderRecId = batchHeader.parmBatchHeaderId();
+        AAXBatchPerfTable.insert();
+        ttscommit;
+
+        info(strFmt("Batch job '%1' Created", batchHeader.parmCaption()));
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>ScheduleDemoJob</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+class ScheduleDemoJob extends RunBase
+{
+    DialogField fieldWorkItemCount;
+    DialogField fieldBundleSize;
+    DialogField fieldThrowError;
+
+    // Define the parameters
+    int64 workItemCount;
+    int64 bundleSize;
+    NoYes throwError;
+
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>pack</Name>
+				<Source><![CDATA[
+    // Pack method to serialize the dialog state
+    public container pack()
+    {
+        return [this.workItemCount, this.bundleSize, this.throwError];
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>unpack</Name>
+				<Source><![CDATA[
+    // Unpack method to deserialize the dialog state
+    public boolean unpack(container _packedClass)
+    {
+        [this.workItemCount, this.bundleSize, this.throwError] = _packedClass;
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>dialog</Name>
+				<Source><![CDATA[
+    // Dialog setup
+    public Object dialog()
+    {
+        DialogRunbase dialog = super();
+
+        dialog.caption("Work Item Process Dialog");
+
+        // Add fields to the dialog
+        this.fieldWorkItemCount = dialog.addFieldValue(extendedTypeStr(Integer64), this.workItemCount);
+        fieldWorkItemCount.label("Work Item Count");
+
+        this.fieldBundleSize = dialog.addFieldValue(extendedTypeStr(Integer64), this.bundleSize);
+        fieldBundleSize.label("Bundle Size");
+
+        this.fieldThrowError = dialog.addFieldValue(extendedTypeStr(NoYesId), this.throwError);
+        fieldThrowError.label("Throw Error for Retry");
+
+        return dialog;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getFromDialog</Name>
+				<Source><![CDATA[
+    // Validate dialog fields
+    public boolean getFromDialog()
+    {
+        this.workItemCount = this.fieldWorkItemCount.value();
+        this.bundleSize = this.fieldBundleSize.value();
+        this.throwError = this.fieldThrowError.value();
+
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>canRunInNewSession</Name>
+				<Source><![CDATA[
+    /// <summary>
+    ///
+    /// </summary>
+    /// <returns></returns>
+    protected boolean canRunInNewSession()
+    {
+        boolean ret;
+    
+        ret = true;
+    
+        return ret;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
