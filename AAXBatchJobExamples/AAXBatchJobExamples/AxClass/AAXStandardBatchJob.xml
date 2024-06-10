@@ -95,6 +95,8 @@ internal final class AAXStandardBatchJob extends RunBaseBatch implements BatchRe
     {
         AAXStandardBatchJobTable AAXStandardBatchJobTable;
 
+        this.batchInfo().parmRetriesOnFailure(this.numberOfRetries());
+
         int64 maxId;
 
         try
@@ -221,7 +223,7 @@ internal final class AAXStandardBatchJob extends RunBaseBatch implements BatchRe
 				<Source><![CDATA[
     public boolean isRetryable()
     {
-        return false;
+        return true;
     }
 
 ]]></Source>
@@ -261,22 +263,21 @@ internal final class AAXStandardBatchJob extends RunBaseBatch implements BatchRe
 ]]></Source>
 			</Method>
 			<Method>
-				<Name>canBeRetried</Name>
-				<Source><![CDATA[
-    // Method to determine if the task can be retried.
-    public boolean canBeRetried()
-    {
-        return true;
-    }
-
-]]></Source>
-			</Method>
-			<Method>
 				<Name>runBaseBatchInfo</Name>
 				<Source><![CDATA[
     public container runBaseBatchInfo()
     {
         return ["AAXStandardBatchJob", #CurrentVersion];
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>numberOfRetries</Name>
+				<Source><![CDATA[
+    public int numberOfRetries()
+    {
+        return 10;
     }
 
 ]]></Source>
