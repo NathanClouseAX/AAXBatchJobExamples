@@ -1,0 +1,37 @@
+﻿# F&O specific
+
+# Ignore everything
+/* 
+
+# But keep custom package and models for Package "AAXBatchJobExamples"
+# This will capture all models the descriptors for the package
+# AAXBatchJobExamples
+!/AAXBatchJobExamples
+# bin isn't required in source control, it'll be created/updated during build if needed
+AAXBatchJobExamples/bin/
+# resources isn't required in source control, it'll be created/updated during build if needed
+AAXBatchJobExamples/resources/
+# XppMetadata isn't required in source control, it'll be created/updated during build if needed
+AAXBatchJobExamples/XppMetadata/
+# All other logs or build outputs are not needed in source control
+AAXBatchJobExamples/*.xml
+AAXBatchJobExamples/*.log
+AAXBatchJobExamples/*.txt
+AAXBatchJobExamples/*.xref
+AAXBatchJobExamples/*.$usr
+
+
+# keep VS Projects in PackagesLocalDirectory\Projects
+!/Projects
+
+# Also include the following files in root of PackagesLocalDirectory
+!.gitignore
+# YAML Pipeline for DevOps
+!azure-pipelines.yml
+# settings for NuGet for Pipeline
+!nuget.config
+# packages references for NuGet for use in Pipeline
+!packages.config
+
+/Projects/AAXBatchJobExamples/.vs/AAXBatchJobExamples
+/Projects/AAXBatchJobExamples/AAXBatchJobExamples/obj/Debug
