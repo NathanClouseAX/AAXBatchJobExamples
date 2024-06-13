@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AxTable xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-	<Name>AAXIndividualTaskWorkItemTable</Name>
+	<Name>AAXBatchTopPickJobWorkStagingTable</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-public class AAXIndividualTaskWorkItemTable extends common
+public class AAXBatchTopPickJobWorkStagingTable extends common
 {
 }
 ]]></Declaration>
@@ -11,48 +11,41 @@ public class AAXIndividualTaskWorkItemTable extends common
 			<Method>
 				<Name>reInit</Name>
 				<Source><![CDATA[
-    public static void reInit(int64 _recordCount)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name = "_recordCount"></param>
+    public static void reInit()
     {
-        AAXBatchBundleWorkItemTable AAXBatchBundleWorkItemTable;
+        AAXBatchTopPickJobWorkStagingTable AAXBatchTopPickJobWorkStagingTable;
 
-        delete_from AAXBatchBundleWorkItemTable;
+        delete_from AAXBatchTopPickJobWorkStagingTable;
 
-        for(int64 i = 0; i < _recordCount; i++)
+        AAXBatchTopPickJobWorkItemTable AAXBatchTopPickJobWorkItemTable;
+
+        while select * from AAXBatchTopPickJobWorkItemTable
         {
-            AAXBatchBundleWorkItemTable::insertRecord(i);
+            ttsbegin;
+            AAXBatchTopPickJobWorkStagingTable.RefRecId = AAXBatchTopPickJobWorkItemTable.RecId;
+            AAXBatchTopPickJobWorkStagingTable.Processed = NoYes::No;
+            AAXBatchTopPickJobWorkStagingTable.insert();
+            ttscommit;
         }
-    }
 
-]]></Source>
-			</Method>
-			<Method>
-				<Name>insertRecord</Name>
-				<Source><![CDATA[
-    public static void insertRecord(int64 _i)
-    {
-        AAXBatchBundleWorkItemTable AAXBatchBundleWorkItemTable;
-
-        ttsbegin;
-
-        AAXBatchBundleWorkItemTable.initValue();
-        AAXBatchBundleWorkItemTable.Id = _i;
-        AAXBatchBundleWorkItemTable.Description = int642Str(_i);
-        AAXBatchBundleWorkItemTable.insert();
-
-        ttscommit;
     }
 
 ]]></Source>
 			</Method>
 		</Methods>
 	</SourceCode>
-	<Label>AAXIndividualTaskWorkItemTable</Label>
+	<Label>AAXStandardBatchJobTable</Label>
 	<SubscriberAccessLevel>
 		<Read>Allow</Read>
 	</SubscriberAccessLevel>
-	<TitleField1>Id</TitleField1>
-	<TitleField2>Description</TitleField2>
+	<TitleField1>RefRecId</TitleField1>
+	<TitleField2>Processed</TitleField2>
 	<AllowRowVersionChangeTracking>Yes</AllowRowVersionChangeTracking>
+	<ClusteredIndex>ProcessedIdx</ClusteredIndex>
 	<DeleteActions />
 	<FieldGroups>
 		<AxTableFieldGroup>
@@ -79,30 +72,27 @@ public class AAXIndividualTaskWorkItemTable extends common
 	</FieldGroups>
 	<Fields>
 		<AxTableField xmlns=""
-			i:type="AxTableFieldInt64">
-			<Name>Id</Name>
-		</AxTableField>
-		<AxTableField xmlns=""
-			i:type="AxTableFieldString">
-			<Name>Description</Name>
-			<ExtendedDataType>Description</ExtendedDataType>
-			<IgnoreEDTRelation>Yes</IgnoreEDTRelation>
-		</AxTableField>
-		<AxTableField xmlns=""
 			i:type="AxTableFieldEnum">
-			<Name>Updated</Name>
+			<Name>Processed</Name>
 			<ExtendedDataType>NoYesId</ExtendedDataType>
 			<IgnoreEDTRelation>Yes</IgnoreEDTRelation>
 			<EnumType>NoYes</EnumType>
+		</AxTableField>
+		<AxTableField xmlns=""
+			i:type="AxTableFieldInt64">
+			<Name>RefRecId</Name>
+			<ExtendedDataType>RefRecId</ExtendedDataType>
+			<IgnoreEDTRelation>Yes</IgnoreEDTRelation>
 		</AxTableField>
 	</Fields>
 	<FullTextIndexes />
 	<Indexes>
 		<AxTableIndex>
-			<Name>IdIdx</Name>
+			<Name>ProcessedIdx</Name>
+			<AllowDuplicates>Yes</AllowDuplicates>
 			<Fields>
 				<AxTableIndexField>
-					<DataField>Id</DataField>
+					<DataField>Processed</DataField>
 				</AxTableIndexField>
 			</Fields>
 		</AxTableIndex>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-	<Name>AAXBatchBundleJobController</Name>
+	<Name>AAXBatchTopPickingController</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-class AAXBatchBundleJobController extends SysOperationServiceController 
+// Service controller
+class AAXBatchTopPickingController extends SysOperationServiceController
 {
 }
 ]]></Declaration>
@@ -13,9 +14,9 @@ class AAXBatchBundleJobController extends SysOperationServiceController
 				<Source><![CDATA[
     public static SysOperationController construct(Args _args = null)
     {
-        SysOperationController controller = new AAXBatchBundleJobController(
-            classStr(AAXBatchBundleService),
-            methodStr(AAXBatchBundleService, process));
+        SysOperationController controller = new AAXBatchTopPickingController(
+            classStr(AAXBatchTopPickingService),
+            methodStr(AAXBatchTopPickingService, process));
 
         controller.parmArgs(_args);
 
@@ -29,7 +30,7 @@ class AAXBatchBundleJobController extends SysOperationServiceController
 				<Source><![CDATA[
     public static void main(Args _args)
     {
-        AAXBatchBundleJobController::construct(_args).startOperation();
+        AAXBatchTopPickingController::construct(_args).startOperation();
     }
 
 ]]></Source>

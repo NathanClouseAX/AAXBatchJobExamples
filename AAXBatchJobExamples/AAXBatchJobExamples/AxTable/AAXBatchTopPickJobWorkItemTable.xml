@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AxTable xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-	<Name>AAXBatchBundleWorkItemTable</Name>
+	<Name>AAXBatchTopPickJobWorkItemTable</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-public class AAXBatchBundleWorkItemTable extends common
+public class AAXBatchTopPickJobWorkItemTable extends common
 {
 }
 ]]></Declaration>
@@ -17,13 +17,13 @@ public class AAXBatchBundleWorkItemTable extends common
     /// <param name = "_recordCount"></param>
     public static void reInit(int64 _recordCount)
     {
-        AAXBatchBundleWorkItemTable AAXBatchBundleWorkItemTable;
+        AAXBatchTopPickJobWorkItemTable AAXBatchTopPickJobWorkItemTable;
 
-        delete_from AAXBatchBundleWorkItemTable;
+        delete_from AAXBatchTopPickJobWorkItemTable;
 
-        for(int64 i = 0; i < _recordCount; i++)
+        for(int64 i = 1; i <= _recordCount; i++)
         {
-            AAXBatchBundleWorkItemTable::insertRecord(i);
+            AAXBatchTopPickJobWorkItemTable::insertRecord(i);
         }
     }
 
@@ -38,23 +38,70 @@ public class AAXBatchBundleWorkItemTable extends common
     /// <param name = "_i"></param>
     public static void insertRecord(int64 _i)
     {
-        AAXBatchBundleWorkItemTable AAXBatchBundleWorkItemTable;
+        AAXBatchTopPickJobWorkItemTable AAXBatchTopPickJobWorkItemTable;
 
         ttsbegin;
 
-        AAXBatchBundleWorkItemTable.initValue();
-        AAXBatchBundleWorkItemTable.Id = _i;
-        AAXBatchBundleWorkItemTable.Description = int642Str(_i);
-        AAXBatchBundleWorkItemTable.insert();
+        AAXBatchTopPickJobWorkItemTable.initValue();
+        AAXBatchTopPickJobWorkItemTable.Id = _i;
+        AAXBatchTopPickJobWorkItemTable.Description = int642Str(_i);
+        AAXBatchTopPickJobWorkItemTable.insert();
 
         ttscommit;
     }
 
 ]]></Source>
 			</Method>
+			<Method>
+				<Name>find</Name>
+				<Source><![CDATA[
+    /// <summary>
+    ///
+    /// </summary>
+    public AAXBatchTopPickJobWorkItemTable find(RecId _Recid, boolean _forUpdate = false)
+    {
+        AAXBatchTopPickJobWorkItemTable AAXBatchTopPickJobWorkItemTable;
+
+        if(_forUpdate)
+        {
+            AAXBatchTopPickJobWorkItemTable.selectForUpdate(_forUpdate);
+        }
+
+        select * from AAXBatchTopPickJobWorkItemTable
+            where AAXBatchTopPickJobWorkItemTable.RecId == _Recid;
+
+        return AAXBatchTopPickJobWorkItemTable;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>ProcessWorkItem</Name>
+				<Source><![CDATA[
+    public static void ProcessWorkItem(RefRecId _refRecId)
+    {
+        AAXBatchTopPickJobWorkItemTable AAXBatchTopPickJobWorkItemTable;
+
+        select * from AAXBatchTopPickJobWorkItemTable
+            where AAXBatchTopPickJobWorkItemTable.RecId == _refRecId
+               && AAXBatchTopPickJobWorkItemTable.Updated == NoYes::No;
+
+        if(AAXBatchTopPickJobWorkItemTable)
+        {
+            ttsbegin;
+            AAXBatchTopPickJobWorkItemTable.Updated = NoYes::Yes;
+            AAXBatchTopPickJobWorkItemTable.update();
+
+            ttscommit;
+        }
+
+    }
+
+]]></Source>
+			</Method>
 		</Methods>
 	</SourceCode>
-	<Label>AAXBatchBundleWorkItemTable</Label>
+	<Label>AAXStandardBatchJobTable</Label>
 	<SubscriberAccessLevel>
 		<Read>Allow</Read>
 	</SubscriberAccessLevel>

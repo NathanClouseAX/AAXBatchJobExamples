@@ -28,6 +28,12 @@
 						<MenuItemName>ScheduleDemoIndividualTaskJob</MenuItemName>
 						<MenuItemType>Action</MenuItemType>
 					</AxMenuElement>
+					<AxMenuElement xmlns=""
+						i:type="AxMenuElementMenuItem">
+						<Name>ScheduleDemoBatchTopPickingJob</Name>
+						<MenuItemName>ScheduleDemoBatchTopPickingJob</MenuItemName>
+						<MenuItemType>Action</MenuItemType>
+					</AxMenuElement>
 				</Elements>
 			</MenuElement>
 		</AxMenuExtensionElement>

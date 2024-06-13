@@ -8,11 +8,13 @@ class ScheduleDemoJob extends RunBase
     DialogField fieldWorkItemCount;
     DialogField fieldBundleSize;
     DialogField fieldThrowError;
+    DialogField fieldBatchJobTasks;
 
     // Define the parameters
     int64 workItemCount;
     int64 bundleSize;
     NoYes throwError;
+    int batchJobTasks;
 
 
 }
@@ -24,7 +26,7 @@ class ScheduleDemoJob extends RunBase
     // Pack method to serialize the dialog state
     public container pack()
     {
-        return [this.workItemCount, this.bundleSize, this.throwError];
+        return [this.workItemCount, this.bundleSize, this.throwError, this.batchJobTasks];
     }
 
 ]]></Source>
@@ -35,7 +37,7 @@ class ScheduleDemoJob extends RunBase
     // Unpack method to deserialize the dialog state
     public boolean unpack(container _packedClass)
     {
-        [this.workItemCount, this.bundleSize, this.throwError] = _packedClass;
+        [this.workItemCount, this.bundleSize, this.throwError, this.batchJobTasks] = _packedClass;
         return true;
     }
 
@@ -61,6 +63,9 @@ class ScheduleDemoJob extends RunBase
         this.fieldThrowError = dialog.addFieldValue(extendedTypeStr(NoYesId), this.throwError);
         fieldThrowError.label("Throw Error for Retry");
 
+        this.fieldBatchJobTasks = dialog.addFieldValue(extendedTypeStr(Integer), this.bundleSize);
+        fieldBatchJobTasks.label("Number of Batch Tasks");
+
         return dialog;
     }
 
@@ -75,6 +80,7 @@ class ScheduleDemoJob extends RunBase
         this.workItemCount = this.fieldWorkItemCount.value();
         this.bundleSize = this.fieldBundleSize.value();
         this.throwError = this.fieldThrowError.value();
+        this.batchJobTasks = this.fieldBatchJobTasks.value();
 
         return true;
     }

@@ -21,7 +21,7 @@ public class AAXStandardBatchJobTable extends common
 
         delete_from AAXStandardBatchJobTable;
 
-        for(int64 i = 1; i < _recordCount; i++)
+        for(int64 i = 0; i < _recordCount; i++)
         {
             AAXStandardBatchJobTable::insertRecord(i);
         }

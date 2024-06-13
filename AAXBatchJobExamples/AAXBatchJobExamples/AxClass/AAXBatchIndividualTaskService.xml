@@ -5,6 +5,7 @@
 		<Declaration><![CDATA[
 public class AAXBatchIndividualTaskService extends SysOperationServiceBase implements BatchRetryable
 {
+
 }
 ]]></Declaration>
 		<Methods>
@@ -36,28 +37,6 @@ public class AAXBatchIndividualTaskService extends SysOperationServiceBase imple
     public boolean isRetryable()
     {
         return true;
-    }
-
-]]></Source>
-			</Method>
-			<Method>
-				<Name>numberOfRetries</Name>
-				<Source><![CDATA[
-    // Method to return the retry count.
-    public int numberOfRetries()
-    {
-        return 3;
-    }
-
-]]></Source>
-			</Method>
-			<Method>
-				<Name>retryDelay</Name>
-				<Source><![CDATA[
-    // Method to return the retry delay in milliseconds.
-    public int retryDelay()
-    {
-        return 5000; // 5 seconds
     }
 
 ]]></Source>

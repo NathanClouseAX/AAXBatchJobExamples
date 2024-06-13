@@ -29,6 +29,8 @@ class ScheduleDemoIndividualTaskJob extends ScheduleDemoJob
         DialogRunbase dialog = super();
 
         dialog.caption("Individual Task Dialog");
+        fieldBundleSize.visible(false);
+        fieldBatchJobTasks.visible(false);
 
         return dialog;
     }
@@ -82,7 +84,7 @@ class ScheduleDemoIndividualTaskJob extends ScheduleDemoJob
         {
 
             controller  = AAXBatchIndividualTaskController::construct();
-            individualTasksDataContract = new AAXBatchIndividualTaskDataContract();
+            individualTasksDataContract = controller.getDataContractObject();
 
             individualTasksDataContract.parmRecId(AAXBatchBundleWorkItemTable.RecId);
             individualTasksDataContract.parmThrowError(throwError);

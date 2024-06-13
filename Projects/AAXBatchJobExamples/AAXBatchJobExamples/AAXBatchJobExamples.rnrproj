@@ -39,25 +39,20 @@
     <Folder Include="Tables\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AxClass\AAXBatchBundleController">
+      <SubType>Content</SubType>
+      <Name>AAXBatchBundleController</Name>
+      <Link>Classes\AAXBatchBundleController</Link>
+    </Content>
     <Content Include="AxClass\AAXBatchBundleDataContract">
       <SubType>Content</SubType>
       <Name>AAXBatchBundleDataContract</Name>
       <Link>Classes\AAXBatchBundleDataContract</Link>
     </Content>
-    <Content Include="AxClass\AAXBatchBundleJobController">
-      <SubType>Content</SubType>
-      <Name>AAXBatchBundleJobController</Name>
-      <Link>Classes\AAXBatchBundleJobController</Link>
-    </Content>
     <Content Include="AxClass\AAXBatchBundleService">
       <SubType>Content</SubType>
       <Name>AAXBatchBundleService</Name>
       <Link>Classes\AAXBatchBundleService</Link>
-    </Content>
-    <Content Include="AxClass\AAXBatchBundleUIBuilder">
-      <SubType>Content</SubType>
-      <Name>AAXBatchBundleUIBuilder</Name>
-      <Link>Classes\AAXBatchBundleUIBuilder</Link>
     </Content>
     <Content Include="AxClass\AAXBatchBundleWorkItem">
       <SubType>Content</SubType>
@@ -84,6 +79,16 @@
       <Name>AAXBatchIndividualTaskService</Name>
       <Link>Classes\AAXBatchIndividualTaskService</Link>
     </Content>
+    <Content Include="AxClass\AAXBatchTopPickingController">
+      <SubType>Content</SubType>
+      <Name>AAXBatchTopPickingController</Name>
+      <Link>Classes\AAXBatchTopPickingController</Link>
+    </Content>
+    <Content Include="AxClass\AAXBatchTopPickingService">
+      <SubType>Content</SubType>
+      <Name>AAXBatchTopPickingService</Name>
+      <Link>Classes\AAXBatchTopPickingService</Link>
+    </Content>
     <Content Include="AxClass\AAXStandardBatchJob">
       <SubType>Content</SubType>
       <Name>AAXStandardBatchJob</Name>
@@ -93,6 +98,11 @@
       <SubType>Content</SubType>
       <Name>ScheduleDemoBatchJob</Name>
       <Link>Classes\ScheduleDemoBatchJob</Link>
+    </Content>
+    <Content Include="AxClass\ScheduleDemoBatchTopPickingJob">
+      <SubType>Content</SubType>
+      <Name>ScheduleDemoBatchTopPickingJob</Name>
+      <Link>Classes\ScheduleDemoBatchTopPickingJob</Link>
     </Content>
     <Content Include="AxClass\ScheduleDemoBundleJob">
       <SubType>Content</SubType>
@@ -124,6 +134,11 @@
       <Name>ScheduleDemoBatchJob</Name>
       <Link>Action Menu Items\ScheduleDemoBatchJob</Link>
     </Content>
+    <Content Include="AxMenuItemAction\ScheduleDemoBatchTopPickingJob">
+      <SubType>Content</SubType>
+      <Name>ScheduleDemoBatchTopPickingJob</Name>
+      <Link>Action Menu Items\ScheduleDemoBatchTopPickingJob</Link>
+    </Content>
     <Content Include="AxMenuItemAction\ScheduleDemoBundleJob">
       <SubType>Content</SubType>
       <Name>ScheduleDemoBundleJob</Name>
@@ -143,6 +158,16 @@
       <SubType>Content</SubType>
       <Name>AAXBatchPerfTable</Name>
       <Link>Tables\AAXBatchPerfTable</Link>
+    </Content>
+    <Content Include="AxTable\AAXBatchTopPickJobWorkItemTable">
+      <SubType>Content</SubType>
+      <Name>AAXBatchTopPickJobWorkItemTable</Name>
+      <Link>Tables\AAXBatchTopPickJobWorkItemTable</Link>
+    </Content>
+    <Content Include="AxTable\AAXBatchTopPickJobWorkStagingTable">
+      <SubType>Content</SubType>
+      <Name>AAXBatchTopPickJobWorkStagingTable</Name>
+      <Link>Tables\AAXBatchTopPickJobWorkStagingTable</Link>
     </Content>
     <Content Include="AxTable\AAXIndividualTaskWorkItemTable">
       <SubType>Content</SubType>

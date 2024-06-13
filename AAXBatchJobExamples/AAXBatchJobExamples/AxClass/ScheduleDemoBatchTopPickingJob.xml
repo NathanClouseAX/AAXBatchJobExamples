@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-	<Name>ScheduleDemoBatchJob</Name>
+	<Name>ScheduleDemoBatchTopPickingJob</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-class ScheduleDemoBatchJob extends ScheduleDemoJob
+// Job to schedule the batch
+class ScheduleDemoBatchTopPickingJob extends ScheduleDemoJob
 {
-
 }
 ]]></Declaration>
 		<Methods>
 			<Method>
 				<Name>description</Name>
 				<Source><![CDATA[
-    // Description for the dialog
     public static ClassDescription description()
     {
-        return "Dialog to create Standard Batch Job";
+        return "Dialog to create Top Picking Batch Job";
     }
 
 ]]></Source>
@@ -26,12 +25,13 @@ class ScheduleDemoBatchJob extends ScheduleDemoJob
     // Dialog setup
     public Object dialog()
     {
+        batchJobTasks = 4;
+
         DialogRunbase dialog = super();
 
-        dialog.caption("Standard Batch Job Dialog");
+        dialog.caption("Top Pick Batch Job Dialog");
 
         fieldBundleSize.visible(false);
-        fieldBatchJobTasks.visible(false);
 
         return dialog;
     }
@@ -44,7 +44,7 @@ class ScheduleDemoBatchJob extends ScheduleDemoJob
     // Main method to start the dialog
     public static void main(Args _args)
     {
-        ScheduleDemoBatchJob dialog = new ScheduleDemoBatchJob();
+        ScheduleDemoBatchTopPickingJob dialog = new ScheduleDemoBatchTopPickingJob();
         if (dialog.prompt())
         {
             dialog.run();
@@ -60,37 +60,34 @@ class ScheduleDemoBatchJob extends ScheduleDemoJob
     {
         AAXBatchPerfTable                   AAXBatchPerfTable;
         System.Diagnostics.Stopwatch        stopWatch;
-        
-        BatchHeader                         batchHeader;
-        AAXStandardBatchJob                 AAXStandardBatchJob;
 
-        int                                 loopCounter = 0;
-        Set                                 RecIds;
+        BatchHeader                                 batchHeader;
+        SysOperationServiceController               controller;
+        AAXBatchTopPickJobWorkStagingTable          AAXBatchTopPickJobWorkStagingTable; 
 
-        AAXStandardBatchJobTable            AAXStandardBatchJobTable;
-
-        AAXStandardBatchJobTable::reInit(workItemCount);
-
-
-        stopWatch = new System.Diagnostics.Stopwatch();
-        stopWatch.Start();
+        AAXBatchTopPickJobWorkItemTable::reInit(workItemCount);
 
         ttsbegin;
 
+        stopWatch = new System.Diagnostics.Stopwatch();
+
+        AAXBatchTopPickJobWorkStagingTable::reInit(); 
+
         batchHeader = BatchHeader::construct();
 
-        batchHeader.parmCaption(strFmt("AAX: Batch Job Example - %1 work items", workItemCount));
+        batchHeader.parmCaption(strFmt("AAX: Top Picking Example - %1 work items, %2 batch tasks", workItemCount, batchJobTasks));
 
-        AAXStandardBatchJob = AAXStandardBatchJob::construct();
-        AAXStandardBatchJob.parmWorkCount(workItemCount);
-        AAXStandardBatchJob.parmThrowError(throwError);
-        AAXStandardBatchJob.parmInBatch(true);
-        
-        batchHeader.addTask(AAXStandardBatchJob);
+        stopWatch = new System.Diagnostics.Stopwatch();
+
+        for (int i=1; i <= batchJobTasks; i++)
+        {
+            controller = AAXBatchTopPickingController::construct();
+            batchHeader.addTask(controller);
+        }
 
         batchHeader.save();
 
-        ttsCommit;
+        ttscommit;
 
         stopWatch.Stop();
 
@@ -102,7 +99,6 @@ class ScheduleDemoBatchJob extends ScheduleDemoJob
         AAXBatchPerfTable.insert();
         ttscommit;
 
-        info(strFmt("Batch job '%1' Created", batchHeader.parmCaption()));
     }
 
 ]]></Source>

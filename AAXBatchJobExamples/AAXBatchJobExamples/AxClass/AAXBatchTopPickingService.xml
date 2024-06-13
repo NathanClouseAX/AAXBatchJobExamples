@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AAXBatchTopPickingService</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+// Service (batch task)
+public class AAXBatchTopPickingService extends SysOperationServiceBase
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>process</Name>
+				<Source><![CDATA[
+    public void process()
+    {
+        AAXBatchTopPickJobWorkStagingTable AAXBatchTopPickJobWorkStagingTable;
+
+        AAXBatchTopPickJobWorkStagingTable.readPast(true); // skip locked records
+ 
+        do
+        {        
+            ttsbegin;
+            select firstonly pessimisticlock Processed, RecId from AAXBatchTopPickJobWorkStagingTable
+                where AAXBatchTopPickJobWorkStagingTable.Processed == NoYes::No;
+                
+            if (AAXBatchTopPickJobWorkStagingTable)
+            {
+                AAXBatchTopPickJobWorkItemTable::ProcessWorkItem(AAXBatchTopPickJobWorkStagingTable.RefRecId); // process work item
+
+                AAXBatchTopPickJobWorkStagingTable.Processed = NoYes::Yes;
+                AAXBatchTopPickJobWorkStagingTable.update();
+
+            }
+            ttscommit;
+        }
+        while (AAXBatchTopPickJobWorkStagingTable);
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

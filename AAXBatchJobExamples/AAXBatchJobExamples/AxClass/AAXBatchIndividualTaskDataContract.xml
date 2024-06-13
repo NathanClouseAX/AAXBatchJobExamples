@@ -29,7 +29,7 @@ class AAXBatchIndividualTaskDataContract
 			<Method>
 				<Name>parmThrowError</Name>
 				<Source><![CDATA[
-    //[DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
     public NoYes parmThrowError(NoYes _throwError = throwError)
     {
         throwError = _throwError;
@@ -41,7 +41,7 @@ class AAXBatchIndividualTaskDataContract
 			<Method>
 				<Name>parmWorkItemCount</Name>
 				<Source><![CDATA[
-    //[DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
     public int64 parmWorkItemCount(int64 _workItemCount = workItemCount)
     {
         workItemCount = _workItemCount;

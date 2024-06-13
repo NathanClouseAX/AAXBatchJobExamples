@@ -30,7 +30,8 @@ class ScheduleDemoBundleJob extends ScheduleDemoJob
 
         dialog.caption("Batch Bundle Dialog");
 
-        fieldBundleSize.visible(false);
+ 
+        fieldBatchJobTasks.visible(false);
 
         return dialog;
     }
@@ -91,8 +92,8 @@ class ScheduleDemoBundleJob extends ScheduleDemoJob
 
             if(loopCounter >= bundleSize)
             {
-                controller = AAXBatchBundleJobController::construct();
-                bundlesDataContract = new AAXBatchBundleDataContract();
+                controller = AAXBatchBundleController::construct();
+                bundlesDataContract = controller.getDataContractObject('AAXBatchBundleDataContract');
 
                 bundlesDataContract.parmRecIds(RecIds);
                 bundlesDataContract.parmThrowError(throwError);
@@ -103,6 +104,21 @@ class ScheduleDemoBundleJob extends ScheduleDemoJob
                 loopCounter = 0;
                 
             }
+        }
+
+        //catch anything left outside of a group
+        if(loopCounter != 0)
+        {
+            controller = AAXBatchBundleController::construct();
+            bundlesDataContract = controller.getDataContractObject('AAXBatchBundleDataContract');
+
+            bundlesDataContract.parmRecIds(RecIds);
+            bundlesDataContract.parmThrowError(throwError);
+
+            batchHeader.addTask(controller);
+
+            RecIds = new Set(Types::Int64);
+            loopCounter = 0;
         }
 
         batchHeader.save();

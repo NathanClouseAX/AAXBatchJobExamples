@@ -31,7 +31,7 @@ class AAXBatchBundleDataContract
 			<Method>
 				<Name>parmThrowError</Name>
 				<Source><![CDATA[
-    //[DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
     public NoYes parmThrowError(NoYes _throwError = throwError)
     {
         throwError = _throwError;
@@ -43,7 +43,7 @@ class AAXBatchBundleDataContract
 			<Method>
 				<Name>parmWorkItemCount</Name>
 				<Source><![CDATA[
-    //[DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
     public int64 parmWorkItemCount(int64 _workItemCount = workItemCount)
     {
         workItemCount = _workItemCount;
@@ -55,7 +55,7 @@ class AAXBatchBundleDataContract
 			<Method>
 				<Name>parmBundleSize</Name>
 				<Source><![CDATA[
-    //[DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
+    [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
     public int64 parmBundleSize(int64 _bundleSize = bundleSize)
     {
         bundleSize = _bundleSize;
