@@ -6,14 +6,13 @@
 public class AAXBatchBundleService extends SysOperationServiceBase implements BatchRetryable
 {
 
-
 }
 ]]></Declaration>
 		<Methods>
 			<Method>
 				<Name>process</Name>
 				<Source><![CDATA[
-    void process(AAXBatchBundleDataContract _dataContract)
+    public void process(AAXBatchBundleDataContract _dataContract)
     {
         SetEnumerator SetEnumerator;
 
