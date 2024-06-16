@@ -7,10 +7,10 @@
 class AAXBatchIndividualTaskDataContract
 {
     int64 RecId;
-    int64 workItemCount;
     NoYes throwError;
 
 }
+
 ]]></Declaration>
 		<Methods>
 			<Method>
@@ -34,18 +34,6 @@ class AAXBatchIndividualTaskDataContract
     {
         throwError = _throwError;
         return throwError;
-    }
-
-]]></Source>
-			</Method>
-			<Method>
-				<Name>parmWorkItemCount</Name>
-				<Source><![CDATA[
-    [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
-    public int64 parmWorkItemCount(int64 _workItemCount = workItemCount)
-    {
-        workItemCount = _workItemCount;
-        return workItemCount;
     }
 
 ]]></Source>

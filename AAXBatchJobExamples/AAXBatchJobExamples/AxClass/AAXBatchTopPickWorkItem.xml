@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AAXBatchTopPickWorkItem</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+internal final class AAXBatchTopPickWorkItem
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>processWorkItem</Name>
+				<Source><![CDATA[
+    public static void processWorkItem(RecId _recId)
+    {
+        AAXBatchTopPickJobWorkItemTable AAXBatchTopPickJobWorkItemTable;
+
+        select forupdate Id, Updated, RecId from AAXBatchTopPickJobWorkItemTable
+            where AAXBatchTopPickJobWorkItemTable.RecId == _recId
+            && AAXBatchTopPickJobWorkItemTable.Updated == NoYes::No;
+
+        if(AAXBatchTopPickJobWorkItemTable)
+        {
+            ttsbegin;
+            AAXBatchTopPickJobWorkItemTable.Updated = NoYes::Yes;
+            AAXBatchTopPickJobWorkItemTable.update();
+            ttscommit;
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

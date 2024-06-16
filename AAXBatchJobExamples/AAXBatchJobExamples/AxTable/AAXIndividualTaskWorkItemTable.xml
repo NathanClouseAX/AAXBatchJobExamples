@@ -13,13 +13,13 @@ public class AAXIndividualTaskWorkItemTable extends common
 				<Source><![CDATA[
     public static void reInit(int64 _recordCount)
     {
-        AAXBatchBundleWorkItemTable AAXBatchBundleWorkItemTable;
+        AAXIndividualTaskWorkItemTable AAXIndividualTaskWorkItemTable;
 
-        delete_from AAXBatchBundleWorkItemTable;
+        delete_from AAXIndividualTaskWorkItemTable;
 
         for(int64 i = 0; i < _recordCount; i++)
         {
-            AAXBatchBundleWorkItemTable::insertRecord(i);
+            AAXIndividualTaskWorkItemTable::insertRecord(i);
         }
     }
 
@@ -30,14 +30,14 @@ public class AAXIndividualTaskWorkItemTable extends common
 				<Source><![CDATA[
     public static void insertRecord(int64 _i)
     {
-        AAXBatchBundleWorkItemTable AAXBatchBundleWorkItemTable;
+        AAXIndividualTaskWorkItemTable AAXIndividualTaskWorkItemTable;
 
         ttsbegin;
 
-        AAXBatchBundleWorkItemTable.initValue();
-        AAXBatchBundleWorkItemTable.Id = _i;
-        AAXBatchBundleWorkItemTable.Description = int642Str(_i);
-        AAXBatchBundleWorkItemTable.insert();
+        AAXIndividualTaskWorkItemTable.initValue();
+        AAXIndividualTaskWorkItemTable.Id = _i;
+        AAXIndividualTaskWorkItemTable.Description = int642Str(_i);
+        AAXIndividualTaskWorkItemTable.insert();
 
         ttscommit;
     }

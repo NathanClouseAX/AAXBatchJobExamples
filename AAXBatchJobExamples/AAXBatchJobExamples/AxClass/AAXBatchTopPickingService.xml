@@ -3,7 +3,6 @@
 	<Name>AAXBatchTopPickingService</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-// Service (batch task)
 public class AAXBatchTopPickingService extends SysOperationServiceBase
 {
 }
@@ -26,7 +25,8 @@ public class AAXBatchTopPickingService extends SysOperationServiceBase
                 
             if (AAXBatchTopPickJobWorkStagingTable)
             {
-                AAXBatchTopPickJobWorkItemTable::ProcessWorkItem(AAXBatchTopPickJobWorkStagingTable.RefRecId); // process work item
+
+                AAXBatchTopPickWorkItem::processWorkItem(AAXBatchTopPickJobWorkStagingTable.RefRecId);
 
                 AAXBatchTopPickJobWorkStagingTable.Processed = NoYes::Yes;
                 AAXBatchTopPickJobWorkStagingTable.update();

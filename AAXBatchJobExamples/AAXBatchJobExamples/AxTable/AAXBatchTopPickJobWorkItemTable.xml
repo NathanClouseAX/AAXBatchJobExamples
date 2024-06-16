@@ -75,30 +75,6 @@ public class AAXBatchTopPickJobWorkItemTable extends common
 
 ]]></Source>
 			</Method>
-			<Method>
-				<Name>ProcessWorkItem</Name>
-				<Source><![CDATA[
-    public static void ProcessWorkItem(RefRecId _refRecId)
-    {
-        AAXBatchTopPickJobWorkItemTable AAXBatchTopPickJobWorkItemTable;
-
-        select * from AAXBatchTopPickJobWorkItemTable
-            where AAXBatchTopPickJobWorkItemTable.RecId == _refRecId
-               && AAXBatchTopPickJobWorkItemTable.Updated == NoYes::No;
-
-        if(AAXBatchTopPickJobWorkItemTable)
-        {
-            ttsbegin;
-            AAXBatchTopPickJobWorkItemTable.Updated = NoYes::Yes;
-            AAXBatchTopPickJobWorkItemTable.update();
-
-            ttscommit;
-        }
-
-    }
-
-]]></Source>
-			</Method>
 		</Methods>
 	</SourceCode>
 	<Label>AAXStandardBatchJobTable</Label>

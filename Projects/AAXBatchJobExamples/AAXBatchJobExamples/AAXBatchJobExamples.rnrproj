@@ -89,6 +89,11 @@
       <Name>AAXBatchTopPickingService</Name>
       <Link>Classes\AAXBatchTopPickingService</Link>
     </Content>
+    <Content Include="AxClass\AAXBatchTopPickWorkItem">
+      <SubType>Content</SubType>
+      <Name>AAXBatchTopPickWorkItem</Name>
+      <Link>Classes\AAXBatchTopPickWorkItem</Link>
+    </Content>
     <Content Include="AxClass\AAXStandardBatchJob">
       <SubType>Content</SubType>
       <Name>AAXStandardBatchJob</Name>

@@ -65,9 +65,9 @@ class ScheduleDemoIndividualTaskJob extends ScheduleDemoJob
 
         Set                                 RecIds;
 
-        AAXBatchBundleWorkItemTable         AAXBatchBundleWorkItemTable;
+        AAXIndividualTaskWorkItemTable      AAXIndividualTaskWorkItemTable;
 
-        AAXBatchBundleWorkItemTable::reInit(workItemCount);
+        AAXIndividualTaskWorkItemTable::reInit(workItemCount);
 
         stopWatch = new System.Diagnostics.Stopwatch();
         stopWatch.Start();
@@ -80,13 +80,13 @@ class ScheduleDemoIndividualTaskJob extends ScheduleDemoJob
 
         batchHeader.parmCaption(strFmt("AAX: Individual Task Modeling - %1 work items", workItemCount));
 
-        while select RecId from AAXBatchBundleWorkItemTable
+        while select RecId from AAXIndividualTaskWorkItemTable
         {
 
             controller  = AAXBatchIndividualTaskController::construct();
             individualTasksDataContract = controller.getDataContractObject();
 
-            individualTasksDataContract.parmRecId(AAXBatchBundleWorkItemTable.RecId);
+            individualTasksDataContract.parmRecId(AAXIndividualTaskWorkItemTable.RecId);
             individualTasksDataContract.parmThrowError(throwError);
 
             batchHeader.addTask(controller);

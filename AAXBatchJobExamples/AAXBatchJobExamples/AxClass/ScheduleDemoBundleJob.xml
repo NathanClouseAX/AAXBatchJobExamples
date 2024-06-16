@@ -61,7 +61,7 @@ class ScheduleDemoBundleJob extends ScheduleDemoJob
         System.Diagnostics.Stopwatch        stopWatch;
         
         BatchHeader                         batchHeader;
-        SysOperationServiceController       controller;
+        AAXBatchBundleController            controller;
 
         int                                 loopCounter = 0;
         Set                                 RecIds;
@@ -92,7 +92,7 @@ class ScheduleDemoBundleJob extends ScheduleDemoJob
             if(loopCounter >= bundleSize)
             {
                 controller = AAXBatchBundleController::construct();
-                bundlesDataContract = controller.getDataContractObject('AAXBatchBundleDataContract');
+                bundlesDataContract = controller.getDataContractObject();
 
                 bundlesDataContract.parmRecIds(RecIds);
                 bundlesDataContract.parmThrowError(throwError);
@@ -109,7 +109,7 @@ class ScheduleDemoBundleJob extends ScheduleDemoJob
         if(loopCounter != 0)
         {
             controller = AAXBatchBundleController::construct();
-            bundlesDataContract = controller.getDataContractObject('AAXBatchBundleDataContract') as AAXBatchBundleDataContract;
+            bundlesDataContract = controller.getDataContractObject();
 
             bundlesDataContract.parmRecIds(RecIds);
             bundlesDataContract.parmThrowError(throwError);

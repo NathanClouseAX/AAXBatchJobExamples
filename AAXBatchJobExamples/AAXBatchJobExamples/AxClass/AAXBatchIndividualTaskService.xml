@@ -14,8 +14,8 @@ public class AAXBatchIndividualTaskService extends SysOperationServiceBase imple
 				<Source><![CDATA[
     public void process(AAXBatchIndividualTaskDataContract _dataContract)
     {
-        info(strFmt("Running batch job with parameter: %1", _dataContract.parmWorkItemCount()));
-        Info(strfmt("ThrowError set to %1", _dataContract.parmWorkItemCount()));
+        info(strFmt("Running batch job with RecId parameter: %1", _dataContract.parmRecId()));
+        Info(strfmt("ThrowError set to %1", _dataContract.parmThrowError()));
 
         AAXBatchIndividualTaskModelWorkItem::doProcessWorkItem(_dataContract.parmRecId()); 
 
@@ -31,9 +31,6 @@ public class AAXBatchIndividualTaskService extends SysOperationServiceBase imple
 			<Method>
 				<Name>isRetryable</Name>
 				<Source><![CDATA[
-    /// <summary>
-    ///
-    /// </summary>
     public boolean isRetryable()
     {
         return true;

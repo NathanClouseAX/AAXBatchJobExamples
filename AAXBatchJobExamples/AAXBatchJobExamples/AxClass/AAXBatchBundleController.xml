@@ -13,7 +13,7 @@ class AAXBatchBundleController extends SysOperationServiceController
 				<Source><![CDATA[
     public static SysOperationController construct(Args _args = null)
     {
-        SysOperationController controller = new AAXBatchBundleController(
+        AAXBatchBundleController controller = new AAXBatchBundleController(
             classStr(AAXBatchBundleService),
             methodStr(AAXBatchBundleService, process));
 
