@@ -34,6 +34,20 @@ class AAXBatchIndividualTaskController extends SysOperationServiceController
 
 ]]></Source>
 			</Method>
+			<Method>
+				<Name>caption</Name>
+				<Source><![CDATA[
+    /// <summary>
+    ///
+    /// </summary>
+    /// <returns></returns>
+    public ClassDescription caption()
+    {
+        return "Individual Task Model Task Example";
+    }
+
+]]></Source>
+			</Method>
 		</Methods>
 	</SourceCode>
 </AxClass>

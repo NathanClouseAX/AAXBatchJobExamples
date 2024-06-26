@@ -20,7 +20,7 @@ public class AAXBatchTopPickingService extends SysOperationServiceBase
         do
         {        
             ttsbegin;
-            select firstonly pessimisticlock Processed, RecId from AAXBatchTopPickJobWorkStagingTable
+            select firstonly pessimisticlock Processed, RefRecId, RecId from AAXBatchTopPickJobWorkStagingTable
                 where AAXBatchTopPickJobWorkStagingTable.Processed == NoYes::No;
                 
             if (AAXBatchTopPickJobWorkStagingTable)

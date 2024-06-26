@@ -64,7 +64,7 @@ class ScheduleDemoBundleJob extends ScheduleDemoJob
         AAXBatchBundleController            controller;
 
         int                                 loopCounter = 0;
-        Set                                 RecIds;
+        List                                RecIds;
 
         AAXBatchBundleWorkItemTable         AAXBatchBundleWorkItemTable;
 
@@ -79,27 +79,29 @@ class ScheduleDemoBundleJob extends ScheduleDemoJob
 
         AAXBatchBundleDataContract bundlesDataContract;
 
-        batchHeader.parmCaption(strFmt("AAX: Batch Bundle Example - %1 work items, %2 bundles", workItemCount, bundleSize ));
+        batchHeader.parmCaption(strFmt("AAX: Batch Bundle Example - %1 work items, %2 bundle(s), %3 work items per bundle", workItemCount, num2Str(roundUp(workItemCount/bundleSize, 1), 1, 0, 1,0), bundleSize));
 
-        RecIds = new Set(Types::Int64);
+        RecIds = new List(Types::Int64);
         loopCounter = 0;
+
+        //controller = AAXBatchBundleController::construct();
 
         while select RecId from AAXBatchBundleWorkItemTable
         {
-            RecIds.add(AAXBatchBundleWorkItemTable.RecId);
+            RecIds.addEnd(AAXBatchBundleWorkItemTable.RecId);
             loopCounter++;
 
             if(loopCounter >= bundleSize)
             {
                 controller = AAXBatchBundleController::construct();
-                bundlesDataContract = controller.getDataContractObject();
+                bundlesDataContract = controller.getDataContractObject() as AAXBatchBundleDataContract;
 
                 bundlesDataContract.parmRecIds(RecIds);
                 bundlesDataContract.parmThrowError(throwError);
 
                 batchHeader.addTask(controller);
 
-                RecIds = new Set(Types::Int64);
+                RecIds = new List(Types::Int64);
                 loopCounter = 0;
                 
             }
@@ -109,14 +111,15 @@ class ScheduleDemoBundleJob extends ScheduleDemoJob
         if(loopCounter != 0)
         {
             controller = AAXBatchBundleController::construct();
-            bundlesDataContract = controller.getDataContractObject();
+
+            bundlesDataContract = controller.getDataContractObject() as AAXBatchBundleDataContract;
 
             bundlesDataContract.parmRecIds(RecIds);
             bundlesDataContract.parmThrowError(throwError);
 
             batchHeader.addTask(controller);
 
-            RecIds = new Set(Types::Int64);
+            RecIds = new List(Types::Int64);
             loopCounter = 0;
         }
 

@@ -14,26 +14,26 @@ public class AAXBatchBundleService extends SysOperationServiceBase implements Ba
 				<Source><![CDATA[
     public void process(AAXBatchBundleDataContract _dataContract)
     {
-        SetEnumerator SetEnumerator;
+        ListEnumerator ListEnumerator;
 
         if(_dataContract.parmRecIds() == null)
         {
-            _dataContract.parmRecIds(new Set(Types::Int64));
+            _dataContract.parmRecIds(new List(Types::Int64));
         }
 
-        SetEnumerator = _dataContract.parmRecIds().getEnumerator();
+        ListEnumerator = _dataContract.parmRecIds().getEnumerator();
 
         info(strFmt("Running batch job with parameter: %1", _dataContract.parmWorkItemCount()));
         Info(strfmt("ThrowError set to %1", _dataContract.parmThrowError()));
         Info(strFmt("Bundle size set to %1", _dataContract.parmBundleSize()));
 
-        while(SetEnumerator.moveNext())
+        while(ListEnumerator.moveNext())
         {
-            AAXBatchBundleWorkItem::doProcessWorkItem(SetEnumerator.current());
+            AAXBatchBundleWorkItem::doProcessWorkItem(ListEnumerator.current());
 
             if(_dataContract.parmThrowError())
             {
-                if(new RandomGenerate().randomInt(0,100) == 100)
+                if(new RandomGenerate().randomInt(0,100) >= 99)
                     throw Error("Encountered Error");
             }
 

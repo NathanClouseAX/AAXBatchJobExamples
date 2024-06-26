@@ -35,6 +35,20 @@ class AAXBatchTopPickingController extends SysOperationServiceController
 
 ]]></Source>
 			</Method>
+			<Method>
+				<Name>caption</Name>
+				<Source><![CDATA[
+    /// <summary>
+    ///
+    /// </summary>
+    /// <returns></returns>
+    public ClassDescription caption()
+    {
+        return "Top Picking Task Example";
+    }
+
+]]></Source>
+			</Method>
 		</Methods>
 	</SourceCode>
 </AxClass>

@@ -21,7 +21,7 @@ public class AAXBatchIndividualTaskService extends SysOperationServiceBase imple
 
         if(_dataContract.parmThrowError())
         {
-            if(new RandomGenerate().randomInt(0,100) == 100)
+            if(new RandomGenerate().randomInt(0,100) >= 99)
                 throw Error("Encountered Error");
         }
     }

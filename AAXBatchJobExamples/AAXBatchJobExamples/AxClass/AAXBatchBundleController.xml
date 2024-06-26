@@ -25,11 +25,25 @@ class AAXBatchBundleController extends SysOperationServiceController
 ]]></Source>
 			</Method>
 			<Method>
-				<Name>main</Name>
+				<Name>getContract</Name>
 				<Source><![CDATA[
-    public static void main(Args _args)
+    private AAXBatchBundleDataContract getContract()
     {
-        AAXBatchBundleController::construct(_args).startOperation();
+        return this.getDataContractObject() as AAXBatchBundleDataContract;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>caption</Name>
+				<Source><![CDATA[
+    /// <summary>
+    ///
+    /// </summary>
+    /// <returns></returns>
+    public ClassDescription caption()
+    {
+        return "Batch Bundle Task Example";
     }
 
 ]]></Source>

@@ -21,10 +21,10 @@ internal final class AAXBatchBundleWorkItem
 
         if(AAXBatchBundleWorkItemTable)
         {
-            ttscommit;
+            ttsbegin;
             AAXBatchBundleWorkItemTable.Updated = NoYes::Yes;
             AAXBatchBundleWorkItemTable.update();
-            ttsbegin;
+            ttscommit;
         }
 
         

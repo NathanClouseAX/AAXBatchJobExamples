@@ -6,7 +6,7 @@
 [DataContractAttribute]
 class AAXBatchBundleDataContract
 {
-    Set RecIds;
+    List RecIds;
     int64 workItemCount;
     int64 bundleSize;
 
@@ -18,11 +18,13 @@ class AAXBatchBundleDataContract
 			<Method>
 				<Name>parmRecIds</Name>
 				<Source><![CDATA[
-    [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
-    public Set parmRecIds(Set _recIds = RecIds)
+    [DataMemberAttribute, 
+     SysOperationControlVisibilityAttribute(false),
+     AifCollectionTypeAttribute("_RecIds", Types::Class, classStr(AAXBatchBundleDataContract)),
+     AifCollectionTypeAttribute("return", Types::Class, classStr(AAXBatchBundleDataContract))]
+    public List parmRecIds(List _RecIds = RecIds)
     {
-        RecIds = _recIds;
-
+        RecIds = _RecIds;
         return RecIds;
     }
 
