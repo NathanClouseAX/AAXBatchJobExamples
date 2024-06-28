@@ -25,16 +25,6 @@ class AAXBatchBundleController extends SysOperationServiceController
 ]]></Source>
 			</Method>
 			<Method>
-				<Name>getContract</Name>
-				<Source><![CDATA[
-    private AAXBatchBundleDataContract getContract()
-    {
-        return this.getDataContractObject() as AAXBatchBundleDataContract;
-    }
-
-]]></Source>
-			</Method>
-			<Method>
 				<Name>caption</Name>
 				<Source><![CDATA[
     /// <summary>
