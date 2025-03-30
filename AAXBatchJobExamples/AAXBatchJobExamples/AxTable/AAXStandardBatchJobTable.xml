@@ -3,6 +3,10 @@
 	<Name>AAXStandardBatchJobTable</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
+/// <summary>
+/// Class for managing standard batch job records in the AAX module.
+/// Extends the common class to leverage common table functionality.
+/// </summary>
 public class AAXStandardBatchJobTable extends common
 {
 }
@@ -12,9 +16,9 @@ public class AAXStandardBatchJobTable extends common
 				<Name>reInit</Name>
 				<Source><![CDATA[
     /// <summary>
-    /// 
+    /// Re-initializes the table by deleting all existing records and inserting a specified number of new records.
     /// </summary>
-    /// <param name = "_recordCount"></param>
+    /// <param name="_recordCount">The number of records to insert after re-initialization.</param>
     public static void reInit(int64 _recordCount)
     {
         AAXStandardBatchJobTable AAXStandardBatchJobTable;
@@ -33,9 +37,9 @@ public class AAXStandardBatchJobTable extends common
 				<Name>insertRecord</Name>
 				<Source><![CDATA[
     /// <summary>
-    /// 
+    /// Inserts a new record into the table with the specified ID.
     /// </summary>
-    /// <param name = "_i"></param>
+    /// <param name="_i">The ID to assign to the new record.</param>
     public static void insertRecord(int64 _i)
     {
         AAXStandardBatchJobTable AAXStandardBatchJobTable;

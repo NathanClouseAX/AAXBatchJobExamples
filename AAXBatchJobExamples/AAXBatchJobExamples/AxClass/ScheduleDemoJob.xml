@@ -3,6 +3,10 @@
 	<Name>ScheduleDemoJob</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
+/// <summary>
+/// Class for scheduling and configuring demo batch jobs.
+/// Extends the RunBase class to provide dialog setup and job scheduling functionality.
+/// </summary>
 class ScheduleDemoJob extends RunBase
 {
     DialogField fieldWorkItemCount;
@@ -16,14 +20,16 @@ class ScheduleDemoJob extends RunBase
     NoYes throwError;
     int batchJobTasks;
 
-
 }
 ]]></Declaration>
 		<Methods>
 			<Method>
 				<Name>pack</Name>
 				<Source><![CDATA[
-    // Pack method to serialize the dialog state
+    /// <summary>
+    /// Serializes the dialog state into a container.
+    /// </summary>
+    /// <returns>A container holding the serialized dialog state.</returns>
     public container pack()
     {
         return [this.workItemCount, this.bundleSize, this.throwError, this.batchJobTasks];
@@ -34,7 +40,11 @@ class ScheduleDemoJob extends RunBase
 			<Method>
 				<Name>unpack</Name>
 				<Source><![CDATA[
-    // Unpack method to deserialize the dialog state
+    /// <summary>
+    /// Deserializes the dialog state from a container.
+    /// </summary>
+    /// <param name="_packedClass">A container holding the serialized dialog state.</param>
+    /// <returns>True if unpacking is successful.</returns>
     public boolean unpack(container _packedClass)
     {
         [this.workItemCount, this.bundleSize, this.throwError, this.batchJobTasks] = _packedClass;
@@ -46,7 +56,11 @@ class ScheduleDemoJob extends RunBase
 			<Method>
 				<Name>dialog</Name>
 				<Source><![CDATA[
-    // Dialog setup
+    /// <summary>
+    /// Sets up the dialog for configuring the batch job.
+    /// Adds fields to the dialog for work item count, bundle size, throw error, and batch job tasks.
+    /// </summary>
+    /// <returns>The configured dialog object.</returns>
     public Object dialog()
     {
         DialogRunbase dialog = super();
@@ -74,7 +88,10 @@ class ScheduleDemoJob extends RunBase
 			<Method>
 				<Name>getFromDialog</Name>
 				<Source><![CDATA[
-    // Validate dialog fields
+    /// <summary>
+    /// Retrieves values from the dialog fields.
+    /// </summary>
+    /// <returns>True if values are successfully retrieved.</returns>
     public boolean getFromDialog()
     {
         this.workItemCount = this.fieldWorkItemCount.value();
@@ -91,9 +108,9 @@ class ScheduleDemoJob extends RunBase
 				<Name>canRunInNewSession</Name>
 				<Source><![CDATA[
     /// <summary>
-    ///
+    /// Determines if the job can run in a new session.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>True if the job can run in a new session.</returns>
     protected boolean canRunInNewSession()
     {
         boolean ret;

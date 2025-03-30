@@ -3,7 +3,7 @@
 	<Name>AAXBatchTopPickingService</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-public class AAXBatchTopPickingService extends SysOperationServiceBase
+public class AAXBatchTopPickingService extends SysOperationServiceBase implements BatchRetryable
 {
 }
 ]]></Declaration>
@@ -35,6 +35,16 @@ public class AAXBatchTopPickingService extends SysOperationServiceBase
             ttscommit;
         }
         while (AAXBatchTopPickJobWorkStagingTable);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isRetryable</Name>
+				<Source><![CDATA[
+    public boolean isRetryable()
+    {
+        return true;
     }
 
 ]]></Source>

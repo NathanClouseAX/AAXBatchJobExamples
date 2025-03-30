@@ -3,6 +3,10 @@
 	<Name>AAXBatchBundleWorkItem</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
+/// <summary>
+/// Internal class for processing individual work items in the batch bundle.
+/// This class is marked as final and provides a method to process a single work item based on its RecId.
+/// </summary>
 internal final class AAXBatchBundleWorkItem
 {
 }
@@ -11,6 +15,11 @@ internal final class AAXBatchBundleWorkItem
 			<Method>
 				<Name>doProcessWorkItem</Name>
 				<Source><![CDATA[
+    /// <summary>
+    /// Processes a single work item identified by its RecId.
+    /// Selects the work item for update, marks it as updated, and commits the transaction.
+    /// </summary>
+    /// <param name="_recId">The RecId of the work item to be processed.</param>
     public static void doProcessWorkItem(RecId _recId)
     {
         AAXBatchBundleWorkItemTable AAXBatchBundleWorkItemTable;
@@ -26,8 +35,6 @@ internal final class AAXBatchBundleWorkItem
             AAXBatchBundleWorkItemTable.update();
             ttscommit;
         }
-
-        
     }
 
 ]]></Source>

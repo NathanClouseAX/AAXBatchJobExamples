@@ -3,7 +3,6 @@
 	<Name>AAXBatchTopPickingController</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-// Service controller
 class AAXBatchTopPickingController extends SysOperationServiceController
 {
 }

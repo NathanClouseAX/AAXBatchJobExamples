@@ -3,7 +3,11 @@
 	<Name>AAXBatchBundleController</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
-class AAXBatchBundleController extends SysOperationServiceController 
+/// <summary>
+/// Controller class for batch bundle batch job example
+/// This class extends the SysOperationServiceController to leverage the SysOperation framework for batch processing.
+/// </summary>
+class AAXBatchBundleController extends SysOperationServiceController
 {
 }
 ]]></Declaration>
@@ -11,8 +15,15 @@ class AAXBatchBundleController extends SysOperationServiceController
 			<Method>
 				<Name>construct</Name>
 				<Source><![CDATA[
+    /// <summary>
+    /// Constructs a new instance of AAXBatchBundleController.
+    /// Initializes the controller with the specified service and method for batch processing.
+    /// </summary>
+    /// <param name="_args">Optional arguments for the controller.</param>
+    /// <returns>A new instance of SysOperationController initialized for AAXBatchBundleService.</returns>
     public static SysOperationController construct(Args _args = null)
     {
+        // Initialize the controller with the service class and method to be executed
         AAXBatchBundleController controller = new AAXBatchBundleController(
             classStr(AAXBatchBundleService),
             methodStr(AAXBatchBundleService, process));
@@ -28,9 +39,9 @@ class AAXBatchBundleController extends SysOperationServiceController
 				<Name>caption</Name>
 				<Source><![CDATA[
     /// <summary>
-    ///
+    /// Provides a description or caption for the batch task.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>A string description of the batch task.</returns>
     public ClassDescription caption()
     {
         return "Batch Bundle Task Example";

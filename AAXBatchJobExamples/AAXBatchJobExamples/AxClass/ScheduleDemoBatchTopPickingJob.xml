@@ -70,6 +70,7 @@ class ScheduleDemoBatchTopPickingJob extends ScheduleDemoJob
         ttsbegin;
 
         stopWatch = new System.Diagnostics.Stopwatch();
+        stopWatch.Start();
 
         AAXBatchTopPickJobWorkStagingTable::reInit(); 
 
@@ -77,7 +78,6 @@ class ScheduleDemoBatchTopPickingJob extends ScheduleDemoJob
 
         batchHeader.parmCaption(strFmt("AAX: Top Picking Example - %1 work items, %2 batch tasks", workItemCount, batchJobTasks));
 
-        stopWatch = new System.Diagnostics.Stopwatch();
 
         for (int i=1; i <= batchJobTasks; i++)
         {

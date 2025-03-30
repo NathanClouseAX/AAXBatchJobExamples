@@ -3,13 +3,23 @@
 	<Name>AAXBatchBundleDataContract</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
+/// <summary>
+/// Data contract class for batch bundle batch job example.
+/// This class holds the data required for processing batch bundles, including record IDs, work item count, bundle size, and error handling.
+/// </summary>
 [DataContractAttribute]
 class AAXBatchBundleDataContract
 {
+    // List of record IDs to be processed in the batch
     List RecIds;
+    
+    // Number of work items to process
     int64 workItemCount;
+    
+    // Size of the bundle to be processed
     int64 bundleSize;
 
+    // Flag indicating whether to throw an error
     NoYes throwError;
 
 }
@@ -18,7 +28,12 @@ class AAXBatchBundleDataContract
 			<Method>
 				<Name>parmRecIds</Name>
 				<Source><![CDATA[
-    [DataMemberAttribute, 
+    /// <summary>
+    /// Gets or sets the list of record IDs.
+    /// </summary>
+    /// <param name="_RecIds">Optional parameter to set the list of record IDs.</param>
+    /// <returns>The list of record IDs.</returns>
+    [DataMemberAttribute,
      SysOperationControlVisibilityAttribute(false),
      AifCollectionTypeAttribute("_RecIds", Types::Class, classStr(AAXBatchBundleDataContract)),
      AifCollectionTypeAttribute("return", Types::Class, classStr(AAXBatchBundleDataContract))]
@@ -33,6 +48,11 @@ class AAXBatchBundleDataContract
 			<Method>
 				<Name>parmThrowError</Name>
 				<Source><![CDATA[
+    /// <summary>
+    /// Gets or sets the throw error flag.
+    /// </summary>
+    /// <param name="_throwError">Optional parameter to set the throw error flag.</param>
+    /// <returns>The throw error flag.</returns>
     [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
     public NoYes parmThrowError(NoYes _throwError = throwError)
     {
@@ -45,6 +65,11 @@ class AAXBatchBundleDataContract
 			<Method>
 				<Name>parmWorkItemCount</Name>
 				<Source><![CDATA[
+    /// <summary>
+    /// Gets or sets the work item count.
+    /// </summary>
+    /// <param name="_workItemCount">Optional parameter to set the work item count.</param>
+    /// <returns>The work item count.</returns>
     [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
     public int64 parmWorkItemCount(int64 _workItemCount = workItemCount)
     {
@@ -57,6 +82,11 @@ class AAXBatchBundleDataContract
 			<Method>
 				<Name>parmBundleSize</Name>
 				<Source><![CDATA[
+    /// <summary>
+    /// Gets or sets the bundle size.
+    /// </summary>
+    /// <param name="_bundleSize">Optional parameter to set the bundle size.</param>
+    /// <returns>The bundle size.</returns>
     [DataMemberAttribute, SysOperationControlVisibilityAttribute(false)]
     public int64 parmBundleSize(int64 _bundleSize = bundleSize)
     {

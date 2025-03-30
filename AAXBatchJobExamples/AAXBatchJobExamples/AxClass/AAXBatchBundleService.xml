@@ -3,15 +3,24 @@
 	<Name>AAXBatchBundleService</Name>
 	<SourceCode>
 		<Declaration><![CDATA[
+/// <summary>
+/// Service class for batch bundle batch job example.
+/// This class implements the SysOperationServiceBase for batch processing and supports retryable batch operations.
+/// </summary>
 public class AAXBatchBundleService extends SysOperationServiceBase implements BatchRetryable
 {
-
 }
 ]]></Declaration>
 		<Methods>
 			<Method>
 				<Name>process</Name>
 				<Source><![CDATA[
+    /// <summary>
+    /// Processes the batch bundle using the provided data contract.
+    /// Logs information about the batch job and processes each work item in the batch.
+    /// Throws an error randomly if the throwError flag is set in the data contract.
+    /// </summary>
+    /// <param name="_dataContract">Data contract containing the parameters for the batch bundle process.</param>
     public void process(AAXBatchBundleDataContract _dataContract)
     {
         ListEnumerator ListEnumerator;
@@ -34,11 +43,11 @@ public class AAXBatchBundleService extends SysOperationServiceBase implements Ba
             if(_dataContract.parmThrowError())
             {
                 if(new RandomGenerate().randomInt(0,100) >= 99)
+                {
                     throw Error("Encountered Error");
+                }
             }
-
         }
-
     }
 
 ]]></Source>
@@ -47,8 +56,9 @@ public class AAXBatchBundleService extends SysOperationServiceBase implements Ba
 				<Name>isRetryable</Name>
 				<Source><![CDATA[
     /// <summary>
-    ///
+    /// Indicates whether the batch job is retryable.
     /// </summary>
+    /// <returns>True, indicating the batch job can be retried.</returns>
     public boolean isRetryable()
     {
         return true;
